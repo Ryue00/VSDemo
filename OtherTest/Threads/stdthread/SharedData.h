@@ -1,7 +1,8 @@
 #pragma once
 #include <list>
 #include <mutex>
-
+#include <memory>
+#include<condition_variable>
 // 初始化资源锁
 // static std::mutex resource_mutex;
 template <typename T>

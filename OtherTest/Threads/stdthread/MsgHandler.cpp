@@ -40,7 +40,7 @@ void CMsgHandler::OnWait()
 
 void CMsgHandler::ProcessInnerMsg()
 {
-    InnerMessage innerMsg;
+    // InnerMessage innerMsg;
     // while (m_pMsgPipe->Recv(-1, -1, innerMsg))
     // {
     //     OnRecvInnerMsg(innerMsg);

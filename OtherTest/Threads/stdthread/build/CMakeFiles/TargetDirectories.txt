@@ -1,0 +1,3 @@
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/build/CMakeFiles/edit_cache.dir
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/build/CMakeFiles/rebuild_cache.dir
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/build/CMakeFiles/ThreadDemo.dir

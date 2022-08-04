@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/MsgHandler.cpp
+MsgHandler.h
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/MsgHandler.h
+chrono
+-
+iostream
+-
+
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/MsgHandler.h
+deque
+-
+condition_variable
+-
+messagepipe/I_MessagePipe.h
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/messagepipe/I_MessagePipe.h
+messagepipe/Inner_Protocol.h
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/messagepipe/Inner_Protocol.h
+
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/messagepipe/I_MessagePipe.h
+
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/messagepipe/Inner_Protocol.h
+ObjectPool.h
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/messagepipe/ObjectPool.h
+
+/home/ryue00/data/VSDemo/OtherTest/Threads/stdthread/messagepipe/ObjectPool.h
+memory
+-
+iostream
+-
+mutex
+-
+
