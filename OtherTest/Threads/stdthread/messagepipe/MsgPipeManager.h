@@ -1,12 +1,9 @@
 #pragma once
 #include <vector>
-#include "../CommonMacro.h"
 
 class IMessagePipe;
 class CMsgPipeManager
 {
-	INSTANCE_DECLARATION(CMsgPipeManager)
-
 	typedef std::vector<IMessagePipe* > VEC_PIPE;
 
 public:
@@ -26,5 +23,5 @@ private:
 	VEC_PIPE m_vecPipe;
 };
 
-#define g_pMsgPipeMgr	CMsgPipeManager::GetInstance()
+#define g_pMsgPipeMgr	Singleton<CMsgPipeManager>::GetInstance() 
 

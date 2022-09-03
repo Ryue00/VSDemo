@@ -5,8 +5,6 @@
 
 #include "SharedData.h"
 
-INSTANCE_IMPLEMENTATION_DEFAULT(CTest2MsgHandler)
-
 void CTest2MsgHandler::OnRecvInnerMsg(InnerMessage innerMsg)
 {
     switch (innerMsg.m_msgType)

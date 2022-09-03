@@ -3,7 +3,6 @@
 #include <mutex>
 
 
-#include "CommonMacro.h"
 #include "MsgHandler.h"
 
 // 初始化资源锁
@@ -15,7 +14,6 @@
 class CTest2MsgHandler
 	:	public CMsgHandler
 {
-	INSTANCE_DECLARATION(CTest2MsgHandler)
 
 // public:
 // 	static CTest2MsgHandler* GetInstance()
@@ -46,4 +44,4 @@ public:
 	virtual void OnTestMsg()override;
 };
 
-#define g_pTest2MsgHandler CTest2MsgHandler::GetInstance()
+#define g_pTest2MsgHandler Singleton<CTest2MsgHandler>::GetInstance() 

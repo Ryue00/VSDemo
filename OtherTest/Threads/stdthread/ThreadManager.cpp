@@ -1,11 +1,9 @@
 #include "ThreadManager.h"
-
-
 #include "MsgHandler.h"
 #include "Test1MsgHandler.h"
 #include "Test2MsgHandler.h"
 #include "Thread.h"
-
+#include "SharedData.h"
 void CThreadManager::Init(int threadNumber)
 {
 	for (int i = 0; i < threadNumber; i++)
@@ -13,8 +11,8 @@ void CThreadManager::Init(int threadNumber)
 		m_vecThreads.push_back(new CThread());
 	}
 	
-	m_vecThreads.push_back(new CThread(g_pTest1MsgHandler));
-	m_vecThreads.push_back(new CThread(g_pTest2MsgHandler));
+	m_vecThreads.push_back(new CThread(&g_pTest1MsgHandler));
+	m_vecThreads.push_back(new CThread(&g_pTest2MsgHandler));
 	std::vector<CThread*>::iterator it = m_vecThreads.begin();
 	for (; it != m_vecThreads.end(); ++it)
 	{

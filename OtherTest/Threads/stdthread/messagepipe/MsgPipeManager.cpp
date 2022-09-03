@@ -4,17 +4,7 @@
 #include "I_MessagePipe.h"
 #include "MessagePipe.h"
 
-INSTANCE_IMPLEMENTATION(CMsgPipeManager)
 //////////////////////////////////////////////////////////////////////////
-CMsgPipeManager::CMsgPipeManager(void)
-: m_pipeId(0)
-{
-}
-
-CMsgPipeManager::~CMsgPipeManager(void)
-{
-	Clear();
-}
 
 IMessagePipe* CMsgPipeManager::CreatePipe(const char* pName, int msgPoolSize)
 {

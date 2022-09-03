@@ -36,9 +36,6 @@
     <ClInclude Include="OtherTest\Threads\stdthread\Test2MsgHandler.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="OtherTest\Threads\stdthread\CommonMacro.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="OtherTest\Threads\stdthread\messagepipe\I_MessagePipe.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -64,9 +61,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OtherTest\Threads\stdthread\Entry.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="OtherTest\Threads\stdthread\Thread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -97,8 +91,12 @@
     <ClCompile Include="OtherTest\Threads\stdthread\SharedData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="OtherTest\Threads\stdthread\Demo\packaged_task.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherTest\Threads\stdthread\thread.md" />
+    <None Include="OtherTest\Threads\stdthread\CMakeLists.md" />
   </ItemGroup>
 </Project>

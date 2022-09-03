@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="OtherTest\Threads\stdthread\CommonMacro.h" />
     <ClInclude Include="OtherTest\Threads\stdthread\Entry.h" />
     <ClInclude Include="OtherTest\Threads\stdthread\messagepipe\Inner_Protocol.h" />
     <ClInclude Include="OtherTest\Threads\stdthread\messagepipe\I_MessagePipe.h" />
@@ -158,7 +157,7 @@
     <ResourceCompile Include="Test.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OtherTest\Threads\stdthread\Entry.cpp" />
+    <ClCompile Include="OtherTest\Threads\stdthread\Demo\packaged_task.cpp" />
     <ClCompile Include="OtherTest\Threads\stdthread\messagepipe\Inner_Protocol.cpp" />
     <ClCompile Include="OtherTest\Threads\stdthread\messagepipe\MessagePipe.cpp" />
     <ClCompile Include="OtherTest\Threads\stdthread\MsgHandler.cpp" />
@@ -171,6 +170,7 @@
     <ClCompile Include="OtherTest\Threads\stdthread\Test2MsgHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OtherTest\Threads\stdthread\CMakeLists.md" />
     <None Include="OtherTest\Threads\stdthread\thread.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

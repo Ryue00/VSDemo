@@ -1,6 +1,6 @@
 # 并发与多线程
 
-## 2.1 并发基本概念及实现，进程、线程基本概念
+## 并发基本概念及实现，进程、线程基本概念
 ### 并发
 两个或者更多的任务同时发生：一个程序同时之性能多个独立的任务
 
@@ -14,10 +14,9 @@
 操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。
 一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。
 
-## 2.2 线程启动、结束，创建线程多法、join，detach
+## C++标准线程使用
 
 ### thread 类的简单介绍
-
 
 | 函数名 | 功能 |
 |--|--|
@@ -28,7 +27,7 @@
 | jion() | 该函数调用后会阻塞住线程，当该线程结束后，主线程继续执行
 | detach() |在创建线程对象后马上调用，用于把被创建线程与线程对象分离开，分离的线程变为后台线程，创建的线程的"死活"就与主线程无关
 
-## 2.3 线程传参详解,成员函数做线程函数
+## 线程传参详解,成员函数做线程函数
 ### 线程函数
 
 * 函数指针
@@ -160,7 +159,7 @@ int main()
 }
 ```
 
-## 2.4 创建多个线程、数据共享问题分析、案例代码
+## 创建多个线程、数据共享问题分析
 ### 创建多个线程
 使用容器管控线程
 ```cpp
@@ -194,7 +193,7 @@ int main()
 * read and write data：恶性条件竞争
 C++标准提供保护共享数据的最基本方式就是互斥量mutex，加锁
 
-## 2.5 互斥量概念、用法、死锁演示及解决详解
+## 互斥量概念、用法、死锁问题
 ### 概念、用法
 std::mutex 互斥是C++最基本的保护共享数据的措施，需要妥善组织和编排代码
 ```cpp
@@ -329,7 +328,7 @@ void CSharedData::SendMsgProcess()
 std::lock 可以同时对多个互斥量进行加锁操作，std::lock_guard 使用的是C++ RAII(资源获取即初始化)风格，所以在构造时会对 mutex进行加锁操作
 而std::adopt_lock参数，该结构体可以理解为标志为，加这个参数不会对互斥量进行加锁，但是在析构时还是会进行解锁。
 
-## 2.6 unique_lock详解
+## unique_lock详解
 
 ### 概述
 
@@ -470,7 +469,7 @@ std::defer_lock 与 std::adpot_lock 有相反的效果，std::defer_lock 滞后需要手动loc
 
 对于对象std::unique_lock<std::mutex> 不允许被拷贝，这个跟 std::unique_ptr 智能指针、std::thread() 一样不允许被拷贝，但是可以使用std::move()函数来语义转移，将旧对象所有权转移给新的对象。
 
-## 2.7 单例设计模式共享数据分析、解决，call_once
+## 单例设计模式共享数据
 
 ### call_once用法 
 
@@ -518,11 +517,75 @@ private:
 ```
 std::call_once 需要传入 std::once_flag 变量， 以及一个函数指针，实现只需要加载一次的代码，这互斥量的开销会小并且更安全一些。
 cu
-## 2.8 condition_variable、wait、notify_one、notify_all
+### 使用模板写法
+```cpp
+#pragma once
+#include <list>
+#include <mutex>
+#include <memory>
+#include<condition_variable>
+// 初始化资源锁
+// static std::mutex resource_mutex;
+template <typename T>
+class Singleton
+{
+public:
+	static T& GetInstance()
+	{
+		// 初始化资源专用
+		static std::once_flag resource_flag;
+		std::call_once(resource_flag, [&]() {s_pInstance.reset(new T); });
+		return *s_pInstance;
+	}
+protected:
+	Singleton() {}
+	~Singleton() {}
+protected:
+	static std::unique_ptr<T> s_pInstance;
+};
 
-## 2.9 async、future、packaged_task、promise
-## 2.10 future其他成员函数、shared_future、atomic
-## 2.11 std::atomic续谈、std::async深入谈
-## 2.12 windows临界区、其他各种mutex互斥量
-## 2.13 补充知识、线程池浅谈、数量谈、总结
-## 3.1 课程总结与展望
+template <typename T>
+std::unique_ptr<T> Singleton<T>::s_pInstance = nullptr;
+
+class CSharedData
+	
+{
+public:
+	void RecvMsgProcess();
+	bool ParseRecvMsg(int& data);
+	void SendMsgProcess();
+		
+private:
+	std::list<int> m_testList;
+	std::mutex m_data_mutex;
+	std::mutex m_data_mutex2;
+	std::condition_variable m_cond;
+};
+
+#define g_pSharedData Singleton<CSharedData>::GetInstance()
+
+```
+
+## RAII
+上面的几个类（lock_guard，unique_lock，call_once）都使用了一个叫做RAII的编程技巧。
+
+RAII全称是Resource Acquisition Is Initialization，直译过来就是：资源获取即初始化。
+
+RAII是一种C++编程技术，它将必须在使用前请求的资源（例如：分配的堆内存、执行线程、打开的套接字、打开的文件、锁定的互斥体、磁盘空间、数据库连接等——任何存在受限供给中的事物）的生命周期与一个对象的生存周期相绑定。 RAII保证资源可用于任何会访问该对象的函数。它亦保证所有资源在其控制对象的生存期结束时，以获取顺序的逆序释放。类似地，若资源获取失败（构造函数以异常退出），则为已构造完成的对象和基类子对象所获取的所有资源，会以初始化顺序的逆序释放。这有效地利用了语言特性以消除内存泄漏并保证异常安全。
+
+RAII 可总结如下:
+
+* 将每个资源封装入一个类，其中：
++ 造函数请求资源，并建立所有类不变式，或在它无法完成时抛出异常，
++ 析构函数释放资源并决不抛出异常；
+* 始终经由 RAII 类的实例使用满足要求的资源，该资源
++ 自身拥有自动存储期或临时生存期，或
++ 具有与自动或临时对象的生存期绑定的生存期
+
+## condition_variable、wait、notify_one、notify_all
+
+## async、future、packaged_task、promise
+## future其他成员函数、shared_future、atomic
+## std::atomic续谈、std::async深入谈
+## windows临界区、其他各种mutex互斥量
+## 线程池浅谈、数量谈

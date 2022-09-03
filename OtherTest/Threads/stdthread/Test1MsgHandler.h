@@ -1,14 +1,11 @@
 #pragma once
 #include <cstddef>
 
-
-#include "CommonMacro.h"
+#include "SharedData.h"
 #include "MsgHandler.h"
-
 class CTest1MsgHandler
 	:	public CMsgHandler
 {
-	INSTANCE_DECLARATION(CTest1MsgHandler)
 
 public:
 	void OnRecvInnerMsg(InnerMessage innerMsg) override;
@@ -16,4 +13,4 @@ public:
 	
 };
 
-#define g_pTest1MsgHandler CTest1MsgHandler::GetInstance()
+#define g_pTest1MsgHandler Singleton<CTest1MsgHandler>::GetInstance() 

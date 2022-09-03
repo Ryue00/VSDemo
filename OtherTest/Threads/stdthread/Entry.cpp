@@ -8,6 +8,8 @@
 // #include <queue>
 
 
+#include <future>
+
 #include "MsgHandler.h"
 #include "ThreadManager.h"
 // 注意某些调用可能会抛出std::system_error， 为了简单（偷懒），我没有去捕获
@@ -159,11 +161,29 @@
 //     return 0;
 // }
 
+static const int MAX = 10e8;
+static double sum = 0;
+
+int mythread(int min, int max)
+{
+    std::cout << "thread id: " << std::this_thread::get_id() << "--> start" << std::endl;
+    for (int i = min; i <= max; i++) {
+        sum += sqrt(i);
+    }
+    // std::chrono::milliseconds duration(5000);
+    // std::this_thread::sleep_for(duration);
+    std::cout << "thread id: " << std::this_thread::get_id() << "--> end" << std::endl;
+
+    return sum;
+}
+
 int main()
 {
-    
-    CThreadManager test;
-    test.Init();
+    // CThreadManager test;
+    // test.Init();
 
+    auto f1 = std::async(mythread, 0, 100);
+    f1.wait();
+    std::cout << "thread id: " << std::this_thread::get_id() << "--> sum="<< sum << std::endl;
     return 0;
 }
